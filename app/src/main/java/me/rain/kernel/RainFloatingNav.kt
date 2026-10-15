@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -52,7 +51,6 @@ class RainFloatingNav @JvmOverloads constructor(
                     selected = selectedPage,
                     onClick = { index -> if (index != selectedPage) onNavigate?.accept(index) },
                     mode = FloatingNavigationBarMode.IconOnly,
-                    color = if (isSystemInDarkTheme()) Color(0xFF29292B) else Color(0xFFF7F7F8),
                 )
             }
         }
