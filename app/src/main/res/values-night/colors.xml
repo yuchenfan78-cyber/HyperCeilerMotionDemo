@@ -1,7 +1,0 @@
-<resources>
-    <color name="surface">#121111</color>
-    <color name="primary_text">#F7F3F0</color>
-    <color name="secondary_text">#9F9994</color>
-    <color name="button_background">#F5F1EE</color>
-    <color name="button_foreground">#24211F</color>
-</resources>
