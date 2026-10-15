@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/RK_Page">
+    <TextView style="@style/RK_PageTitle" android:text="@string/profiles_title" />
+    <TextView style="@style/RK_PageSubtitle" android:text="@string/profiles_subtitle" />
+    <TextView style="@style/RK_SectionTitle" android:text="@string/profiles_section" />
+    <LinearLayout
+        android:id="@+id/profile_balanced" style="@style/RK_Card"
+        android:background="@drawable/bg_profile"
+        android:gravity="center_vertical" android:orientation="horizontal"
+        android:clickable="true" android:focusable="true">
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/profile_balanced" android:textColor="@color/text_primary"
+                android:textSize="16sp" android:textStyle="bold" />
+            <TextView style="@style/RK_PageSubtitle" android:text="@string/profile_balanced_detail" />
+        </LinearLayout>
+        <TextView android:id="@+id/profile_selection"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary" android:textSize="12sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/profile_performance" style="@style/RK_Card"
+        android:background="@drawable/bg_profile" android:layout_marginTop="11dp"
+        android:gravity="center_vertical" android:orientation="horizontal"
+        android:clickable="true" android:focusable="true">
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/profile_performance" android:textColor="@color/text_primary"
+                android:textSize="16sp" android:textStyle="bold" />
+            <TextView style="@style/RK_PageSubtitle" android:text="@string/profile_performance_detail" />
+        </LinearLayout>
+        <TextView android:id="@+id/profile_selection"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary" android:textSize="12sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/profile_battery" style="@style/RK_Card"
+        android:background="@drawable/bg_profile" android:layout_marginTop="11dp"
+        android:gravity="center_vertical" android:orientation="horizontal"
+        android:clickable="true" android:focusable="true">
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/profile_battery" android:textColor="@color/text_primary"
+                android:textSize="16sp" android:textStyle="bold" />
+            <TextView style="@style/RK_PageSubtitle" android:text="@string/profile_battery_detail" />
+        </LinearLayout>
+        <TextView android:id="@+id/profile_selection"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary" android:textSize="12sp" />
+    </LinearLayout>
+    <TextView style="@style/RK_PageSubtitle"
+        android:layout_marginTop="17dp" android:text="@string/profile_preview_only" />
+</LinearLayout>

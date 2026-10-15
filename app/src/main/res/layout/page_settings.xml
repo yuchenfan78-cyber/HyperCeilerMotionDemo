@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/RK_Page">
+    <TextView style="@style/RK_PageTitle" android:text="@string/settings_title" />
+    <TextView style="@style/RK_PageSubtitle" android:text="@string/settings_subtitle" />
+    <TextView style="@style/RK_SectionTitle" android:text="@string/settings_appearance" />
+    <LinearLayout style="@style/RK_Card" android:orientation="vertical">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <LinearLayout android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="@string/setting_show_splash" android:textColor="@color/text_primary"
+                    android:textSize="16sp" android:textStyle="bold" />
+                <TextView style="@style/RK_PageSubtitle" android:text="@string/setting_show_splash_detail" />
+            </LinearLayout>
+            <Switch android:id="@+id/switch_splash" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:contentDescription="@string/setting_show_splash" />
+        </LinearLayout>
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+            android:layout_marginTop="20dp" android:layout_marginBottom="20dp"
+            android:background="@color/line_color" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <LinearLayout android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="@string/setting_motion" android:textColor="@color/text_primary"
+                    android:textSize="16sp" android:textStyle="bold" />
+                <TextView style="@style/RK_PageSubtitle" android:text="@string/setting_motion_detail" />
+            </LinearLayout>
+            <Switch android:id="@+id/switch_motion" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:contentDescription="@string/setting_motion" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView style="@style/RK_SectionTitle" android:text="@string/settings_more" />
+    <LinearLayout android:id="@+id/action_replay" style="@style/RK_Card"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:clickable="true" android:focusable="true">
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="@string/replay_splash" android:textSize="16sp"
+                android:textColor="@color/text_primary" android:textStyle="bold" />
+            <TextView style="@style/RK_PageSubtitle" android:text="@string/replay_splash_detail" />
+        </LinearLayout>
+        <ImageView android:layout_width="20dp" android:layout_height="20dp"
+            android:src="@drawable/ic_chevron" android:contentDescription="@null" />
+    </LinearLayout>
+    <TextView style="@style/RK_PageSubtitle" android:layout_marginTop="22dp"
+        android:gravity="center" android:text="@string/app_signature" />
+</LinearLayout>

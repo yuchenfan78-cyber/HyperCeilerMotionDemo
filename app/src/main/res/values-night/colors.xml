@@ -1,0 +1,10 @@
+<resources>
+    <color name="page_background">#101010</color>
+    <color name="card_background">#1C1C1C</color>
+    <color name="text_primary">#F3F3F3</color>
+    <color name="text_secondary">#ACACAC</color>
+    <color name="text_tertiary">#828282</color>
+    <color name="line_color">#303030</color>
+    <color name="selected_card">#2D2D2D</color>
+    <color name="chip_background">#292929</color>
+</resources>

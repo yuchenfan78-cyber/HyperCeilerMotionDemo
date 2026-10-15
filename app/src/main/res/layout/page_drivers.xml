@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/RK_Page">
+    <TextView style="@style/RK_PageTitle" android:text="@string/drivers_title" />
+    <TextView style="@style/RK_PageSubtitle" android:text="@string/drivers_subtitle" />
+    <LinearLayout style="@style/RK_Card" android:layout_marginTop="24dp" android:orientation="vertical">
+        <TextView style="@style/RK_RowLabel" android:text="@string/driver_connection_label" />
+        <TextView style="@style/RK_RowValue" android:layout_marginTop="9dp"
+            android:text="@string/driver_not_connected" />
+        <TextView style="@style/RK_PageSubtitle" android:layout_marginTop="11dp"
+            android:text="@string/driver_connection_detail" />
+    </LinearLayout>
+    <TextView style="@style/RK_SectionTitle" android:text="@string/drivers_actions" />
+    <LinearLayout
+        style="@style/RK_Card"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/driver_feature_pending" android:textSize="16sp"
+                android:textStyle="bold" android:textColor="@color/text_primary" />
+            <TextView style="@style/RK_PageSubtitle" android:text="@string/driver_feature_detail" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

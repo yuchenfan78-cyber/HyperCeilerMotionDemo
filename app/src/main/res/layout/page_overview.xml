@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/RK_Page">
+    <TextView style="@style/RK_PageTitle" android:text="@string/overview_title" />
+    <TextView style="@style/RK_PageSubtitle" android:text="@string/overview_subtitle" />
+    <LinearLayout
+        style="@style/RK_Card"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
+        <TextView
+            style="@style/RK_RowLabel"
+            android:text="@string/kernel_version_label" />
+        <TextView
+            android:id="@+id/kernel_version"
+            style="@style/RK_RowValue"
+            android:text="@string/unknown"
+            android:textIsSelectable="true" />
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+            android:layout_marginTop="19dp" android:layout_marginBottom="19dp"
+            android:background="@color/line_color" />
+        <TextView style="@style/RK_RowLabel" android:text="@string/device_model_label" />
+        <TextView android:id="@+id/device_model" style="@style/RK_RowValue"
+            android:text="@string/unknown" />
+        <TextView style="@style/RK_RowLabel"
+            android:layout_marginTop="17dp"
+            android:text="@string/android_version_label" />
+        <TextView android:id="@+id/android_version" style="@style/RK_RowValue"
+            android:text="@string/unknown" />
+    </LinearLayout>
+
+    <TextView style="@style/RK_SectionTitle" android:text="@string/overview_actions" />
+    <LinearLayout
+        android:id="@+id/action_drivers"
+        style="@style/RK_Card"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textColor="@color/text_primary" android:textSize="16sp"
+                android:textStyle="bold" android:text="@string/action_drivers" />
+            <TextView style="@style/RK_PageSubtitle" android:text="@string/action_drivers_summary" />
+        </LinearLayout>
+        <ImageView android:layout_width="20dp" android:layout_height="20dp"
+            android:src="@drawable/ic_chevron" android:contentDescription="@null" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/action_profiles"
+        style="@style/RK_Card"
+        android:layout_marginTop="11dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textColor="@color/text_primary" android:textSize="16sp"
+                android:textStyle="bold" android:text="@string/action_profiles" />
+            <TextView style="@style/RK_PageSubtitle" android:text="@string/action_profiles_summary" />
+        </LinearLayout>
+        <ImageView android:layout_width="20dp" android:layout_height="20dp"
+            android:src="@drawable/ic_chevron" android:contentDescription="@null" />
+    </LinearLayout>
+</LinearLayout>

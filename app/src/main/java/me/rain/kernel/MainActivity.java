@@ -1,13 +1,15 @@
 package me.rain.kernel;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.Toast;
+
 
 import com.sevtinge.hyperceiler.provision.renderengine.GlowController;
 import com.sevtinge.hyperceiler.provision.renderengine.RenderViewLayout;
@@ -23,6 +25,13 @@ public final class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle state) {
         super.onCreate(state);
+        SharedPreferences prefs = getSharedPreferences("rainkernel", MODE_PRIVATE);
+        if (!getIntent().getBooleanExtra("preview_splash", false)
+                && !prefs.getBoolean("show_splash", true)) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+            return;
+        }
         configureWindow();
         setContentView(R.layout.provision_startup_layout);
 
@@ -97,7 +106,13 @@ public final class MainActivity extends Activity {
     }
 
     private void onNext() {
-        Toast.makeText(this, R.string.next_step_pending, Toast.LENGTH_SHORT).show();
+        View next = findViewById(R.id.next_layout);
+        next.setEnabled(false);
+        if (!getIntent().getBooleanExtra("preview_splash", false)) {
+            startActivity(new Intent(this, HomeActivity.class));
+        }
+        overridePendingTransition(R.anim.push_in, R.anim.push_out);
+        finish();
     }
 
     @Override

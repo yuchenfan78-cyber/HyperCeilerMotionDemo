@@ -8,10 +8,10 @@ android {
 
     defaultConfig {
         applicationId = "me.rain.kernel"
-        minSdk = 33
+        minSdk = 35
         targetSdk = 35
-        versionCode = 3
-        versionName = "3.0"
+        versionCode = 4
+        versionName = "0.1.0"
     }
 
     compileOptions {
@@ -31,4 +31,11 @@ tasks.matching {
         it.name.startsWith("compile") && it.name.endsWith("JavaWithJavac")
 }.configureEach {
     dependsOn(syncUpstream)
+}
+
+
+dependencies {
+    implementation("fan.miuix:appcompat:1.0.13.0")
+    implementation("fan.miuix:animation:1.0.13.0")
+    implementation("fan.miuix:folme:1.0.13.0")
 }

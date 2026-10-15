@@ -33,6 +33,9 @@ jobs:
           cache-provider: basic
 
       - name: Build APK
+        env:
+          MIUIX_USER: ${{ github.actor }}
+          MIUIX_TOKEN: ${{ secrets.MIUIX_PAT || github.token }}
         run: gradle --no-daemon :app:assembleDebug
 
       - uses: actions/upload-artifact@v7

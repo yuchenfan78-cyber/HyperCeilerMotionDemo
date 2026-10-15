@@ -15,7 +15,18 @@ fetch() {
     mv "$path.tmp" "$path"
 }
 
+rm -rf "$DEST/java/me/rain/motiondemo"
 rm -f "$DEST/res/raw/glow.glsl"
+rm -f "$DEST/res/drawable/provision_logo_image.xml" \
+      "$DEST/res/drawable/provision_logo_image_lite.xml" \
+      "$DEST/res/drawable/provision_text_logo_image.xml" \
+      "$DEST/res/drawable/provision_text_logo_image_lite.xml" \
+      "$DEST/res/drawable/provision_icon_arrow.xml" \
+      "$DEST/res/drawable/provision_next.xml" \
+      "$DEST/res/drawable/provision_next_lite.xml" \
+      "$DEST/res/drawable/provision_logo_image_bg.webp" \
+      "$DEST/res/values/compat_colors.xml" \
+      "$DEST/res/values/dimens.xml"
 fetch 'library/provision/src/main/res/raw/glow.glsl' 'res/raw/glow.agsl'
 fetch 'library/provision/src/main/java/com/sevtinge/hyperceiler/provision/renderengine/GlowController.java' 'java/com/sevtinge/hyperceiler/provision/renderengine/GlowController.java'
 fetch 'library/provision/src/main/java/com/sevtinge/hyperceiler/provision/renderengine/GlowPainter.java' 'java/com/sevtinge/hyperceiler/provision/renderengine/GlowPainter.java'
