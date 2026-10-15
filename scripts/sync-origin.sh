@@ -16,6 +16,18 @@ fetch() {
 }
 
 rm -rf "$DEST/java/me/rain/motiondemo"
+rm -f "$DEST/res/layout/page_overview.xml" \
+      "$DEST/res/layout/page_drivers.xml" \
+      "$DEST/res/layout/page_profiles.xml" \
+      "$DEST/res/layout/page_settings.xml" \
+      "$DEST/res/values/widgets.xml" \
+      "$DEST/res/drawable/bg_card.xml" \
+      "$DEST/res/drawable/bg_profile.xml" \
+      "$DEST/res/drawable/ic_chevron.xml" \
+      "$DEST/res/drawable/ic_drivers.xml" \
+      "$DEST/res/drawable/ic_overview.xml" \
+      "$DEST/res/drawable/ic_profiles.xml" \
+      "$DEST/res/drawable/ic_settings.xml"
 rm -f "$DEST/res/raw/glow.glsl"
 rm -f "$DEST/res/drawable/provision_logo_image.xml" \
       "$DEST/res/drawable/provision_logo_image_lite.xml" \

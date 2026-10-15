@@ -1,11 +1,13 @@
-RainKernel includes an adaptation of the HyperCeiler welcome animation.
+RainKernel includes adapted portions and design references from HyperCeiler.
 
 Source: https://github.com/ReChronoRain/HyperCeiler
-Pinned commit: 861be0473847d5c020102191f2c2891acda5d628
+Pinned render-engine commit: 861be0473847d5c020102191f2c2891acda5d628
 Copyright (C) 2023-2026 HyperCeiler Contributions
 License: GNU Affero General Public License v3.0 (AGPL-3.0)
 
-At build time, the pinned shader and render-engine classes are
-retrieved. The local welcome layout derives from HyperCeiler's layout. The
-upstream Java package names are retained; the GlowPainter R import is adapted
-to RainKernel's namespace. The build fetches the upstream LICENSE text.
+The shader and render-engine classes are fetched from the pinned commit at
+build time. The welcome layout, permission list item appearance, blue check
+vector, and OOBE page structure are adapted for the standalone RainKernel app.
+The animation uses public Android PixelCopy, ActivityOptions, and
+ViewAnimationUtils APIs instead of the closed-source
+fan.transition.ActivityOptionsHelper. The build fetches the upstream LICENSE.

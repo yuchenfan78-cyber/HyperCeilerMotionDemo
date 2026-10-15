@@ -1,10 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="page_background">#101010</color>
-    <color name="card_background">#1C1C1C</color>
+    <color name="page_background">#101012</color>
     <color name="text_primary">#F3F3F3</color>
-    <color name="text_secondary">#ACACAC</color>
-    <color name="text_tertiary">#828282</color>
-    <color name="line_color">#303030</color>
-    <color name="selected_card">#2D2D2D</color>
-    <color name="chip_background">#292929</color>
+    <color name="text_secondary">#9B9B9B</color>
+    <color name="chip_background">#28282A</color>
 </resources>
