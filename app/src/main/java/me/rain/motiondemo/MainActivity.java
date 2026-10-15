@@ -51,15 +51,20 @@ public final class MainActivity extends Activity {
         window.setNavigationBarColor(Color.TRANSPARENT);
         window.setNavigationBarContrastEnforced(false);
         window.setDecorFitsSystemWindows(false);
+    }
+
+    private void updateSystemBarsAppearance() {
+        View decorView = getWindow().getDecorView();
+        if (!decorView.isAttachedToWindow()) return;
+
+        WindowInsetsController controller = decorView.getWindowInsetsController();
+        if (controller == null) return;
 
         boolean isNight = (getResources().getConfiguration().uiMode
             & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
-        WindowInsetsController controller = window.getInsetsController();
-        if (controller != null) {
-            int lightBars = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-                | WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;
-            controller.setSystemBarsAppearance(isNight ? 0 : lightBars, lightBars);
-        }
+        int lightBars = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            | WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;
+        controller.setSystemBarsAppearance(isNight ? 0 : lightBars, lightBars);
     }
 
     private void replay() {
@@ -70,6 +75,7 @@ public final class MainActivity extends Activity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) updateSystemBarsAppearance();
         if (hasFocus && !hasPlayed) {
             hasPlayed = true;
             findViewById(R.id.scene).post(this::replay);
