@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="provision_qr_entrance_size">100dp</dimen>
+    <dimen name="provision_next_button_size">70dp</dimen>
+    <dimen name="provision_startup_logo_width_thirteen">320dp</dimen>
+    <dimen name="provision_startup_logo_height_thirteen">45.28dp</dimen>
+</resources>

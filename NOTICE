@@ -1,0 +1,11 @@
+HyperCeiler welcome animation source attribution
+
+Upstream: https://github.com/ReChronoRain/HyperCeiler
+Pinned upstream commit: 861be0473847d5c020102191f2c2891acda5d628
+Copyright (C) 2023-2026 HyperCeiler Contributions
+License: GNU Affero General Public License v3.0 (AGPL-3.0)
+
+The build downloads unmodified original shader, drawable assets, welcome layout,
+and rendering classes from the pinned upstream commit. The license text is also
+retrieved as LICENSE. The demo Activity, timing adapter and optional native blur
+adapter are independent integration code; the upstream project remains AGPL-3.0.
