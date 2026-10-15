@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "me.rain.kernel"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "me.rain.kernel"
