@@ -15,7 +15,8 @@ fetch() {
     mv "$path.tmp" "$path"
 }
 
-fetch 'library/provision/src/main/res/raw/glow.glsl' 'res/raw/glow.glsl'
+rm -f "$DEST/res/raw/glow.glsl"
+fetch 'library/provision/src/main/res/raw/glow.glsl' 'res/raw/glow.agsl'
 fetch 'library/provision/src/main/res/layout/provision_startup_layout.xml' 'res/layout/provision_startup_layout.xml'
 fetch 'library/provision/src/main/res/drawable/provision_logo_image.xml' 'res/drawable/provision_logo_image.xml'
 fetch 'library/provision/src/main/res/drawable/provision_logo_image_lite.xml' 'res/drawable/provision_logo_image_lite.xml'
