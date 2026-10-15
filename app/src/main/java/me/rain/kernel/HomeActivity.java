@@ -14,7 +14,6 @@ import android.view.Window;
 import android.view.WindowInsets;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -28,20 +27,9 @@ public final class HomeActivity extends AppCompatActivity {
         R.layout.page_overview, R.layout.page_drivers,
         R.layout.page_profiles, R.layout.page_settings
     };
-    private static final int[] TAB_IDS = {
-        R.id.tab_overview, R.id.tab_drivers,
-        R.id.tab_profiles, R.id.tab_settings
-    };
-    private static final int[] ICON_IDS = {
-        R.id.icon_overview, R.id.icon_drivers,
-        R.id.icon_profiles, R.id.icon_settings
-    };
-    private static final int[] LABEL_IDS = {
-        R.id.label_overview, R.id.label_drivers,
-        R.id.label_profiles, R.id.label_settings
-    };
-
     private FrameLayout contentHost;
+    private RainFloatingNav floatingNavigation;
+    private int navigationInsetBottom;
     private SharedPreferences preferences;
     private int currentPage = -1;
 
@@ -52,12 +40,8 @@ public final class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         configureWindow();
         contentHost = findViewById(R.id.content_host);
-        for (int i = 0; i < TAB_IDS.length; i++) {
-            final int position = i;
-            View tab = findViewById(TAB_IDS[i]);
-            tab.setOnClickListener(v -> showPage(position));
-            Folme.useAt(tab).touch().setScale(0.96f).handleTouchOf(tab);
-        }
+        floatingNavigation = findViewById(R.id.floating_navigation);
+        floatingNavigation.setOnNavigate(this::showPage);
         if (savedInstanceState != null) {
             currentPage = -1;
             showPage(savedInstanceState.getInt("page", 0));
@@ -75,7 +59,9 @@ public final class HomeActivity extends AppCompatActivity {
         View root = findViewById(R.id.home_root);
         root.setOnApplyWindowInsetsListener((view, insets) -> {
             android.graphics.Insets bars = insets.getInsets(WindowInsets.Type.systemBars());
-            view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+            view.setPadding(bars.left, bars.top, bars.right, 0);
+            navigationInsetBottom = bars.bottom;
+            updateScrollPadding();
             return insets;
         });
         root.requestApplyInsets();
@@ -89,18 +75,13 @@ public final class HomeActivity extends AppCompatActivity {
         if (page < 0 || page >= PAGE_LAYOUTS.length || currentPage == page) return;
         int direction = currentPage < 0 ? 0 : (page > currentPage ? 1 : -1);
         currentPage = page;
-        for (int i = 0; i < TAB_IDS.length; i++) {
-            boolean selected = i == page;
-            int tint = getColor(selected ? R.color.text_primary : R.color.text_tertiary);
-            ((ImageView) findViewById(ICON_IDS[i])).setColorFilter(tint);
-            ((TextView) findViewById(LABEL_IDS[i])).setTextColor(tint);
-            findViewById(TAB_IDS[i]).setSelected(selected);
-        }
+        floatingNavigation.select(page);
 
         ScrollView scroller = new ScrollView(this);
         scroller.setFillViewport(true);
         scroller.setClipToPadding(false);
         scroller.setVerticalScrollBarEnabled(false);
+        scroller.setPadding(0, 0, 0, dp(94) + navigationInsetBottom);
         View pageContent = LayoutInflater.from(this).inflate(PAGE_LAYOUTS[page], scroller, false);
         scroller.addView(pageContent);
         contentHost.removeAllViews();
@@ -112,6 +93,14 @@ public final class HomeActivity extends AppCompatActivity {
             scroller.setAlpha(0.7f);
             scroller.animate().translationX(0).alpha(1f).setDuration(180)
                 .setInterpolator(new LinearInterpolator()).start();
+        }
+    }
+
+    private void updateScrollPadding() {
+        if (contentHost == null || contentHost.getChildCount() == 0) return;
+        View scroll = contentHost.getChildAt(0);
+        if (scroll instanceof ScrollView) {
+            scroll.setPadding(0, 0, 0, dp(94) + navigationInsetBottom);
         }
     }
 

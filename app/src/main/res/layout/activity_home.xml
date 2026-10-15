@@ -1,77 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/home_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/page_background">
+    android:background="@color/page_background"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:gravity="center_vertical"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="29dp"
-            android:layout_height="29dp"
-            android:src="@drawable/rainkernel_logo"
-            android:tint="@color/text_primary"
-            android:contentDescription="@null" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="11dp"
-            android:text="@string/app_name"
-            android:textColor="@color/text_primary"
-            android:textStyle="bold"
-            android:textSize="21sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_chip"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:paddingTop="7dp"
-            android:paddingBottom="7dp"
-            android:text="@string/version_label"
-            android:textColor="@color/text_secondary"
-            android:textSize="12sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:gravity="center_vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:src="@drawable/rainkernel_logo"
+                android:tint="@color/text_primary"
+                android:contentDescription="@null" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="11dp"
+                android:text="@string/app_name"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:textSize="21sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:text="@string/version_label"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/content_host"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/content_host"
+    <me.rain.kernel.RainFloatingNav
+        android:id="@+id/floating_navigation"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/line_color" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:background="@color/card_background">
-        <LinearLayout android:id="@+id/tab_overview" style="@style/RK_NavItem">
-            <ImageView android:id="@+id/icon_overview" style="@style/RK_NavIcon" android:src="@drawable/ic_overview" />
-            <TextView android:id="@+id/label_overview" style="@style/RK_NavLabel" android:text="@string/tab_overview" />
-        </LinearLayout>
-        <LinearLayout android:id="@+id/tab_drivers" style="@style/RK_NavItem">
-            <ImageView android:id="@+id/icon_drivers" style="@style/RK_NavIcon" android:src="@drawable/ic_drivers" />
-            <TextView android:id="@+id/label_drivers" style="@style/RK_NavLabel" android:text="@string/tab_drivers" />
-        </LinearLayout>
-        <LinearLayout android:id="@+id/tab_profiles" style="@style/RK_NavItem">
-            <ImageView android:id="@+id/icon_profiles" style="@style/RK_NavIcon" android:src="@drawable/ic_profiles" />
-            <TextView android:id="@+id/label_profiles" style="@style/RK_NavLabel" android:text="@string/tab_profiles" />
-        </LinearLayout>
-        <LinearLayout android:id="@+id/tab_settings" style="@style/RK_NavItem">
-            <ImageView android:id="@+id/icon_settings" style="@style/RK_NavIcon" android:src="@drawable/ic_settings" />
-            <TextView android:id="@+id/label_settings" style="@style/RK_NavLabel" android:text="@string/tab_settings" />
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@android:color/transparent" />
+</FrameLayout>
