@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HyperCeiler Motion</string>
+    <string name="brand_name">HyperCeiler</string>
+    <string name="heading">MOTION STUDY  /  01</string>
+    <string name="subtitle">WELCOME MOTION</string>
+    <string name="replay">重播动画</string>
+    <string name="replay_description">重新播放开屏动画</string>
+</resources>

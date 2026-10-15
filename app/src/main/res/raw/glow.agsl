@@ -1,0 +1,42 @@
+uniform float2 uResolution;
+uniform float uTime;
+uniform float uReveal;
+uniform float uDark;
+
+half4 main(float2 fragCoord) {
+    float2 size = max(uResolution, float2(1.0, 1.0));
+    float2 p = (fragCoord - size * 0.5) / min(size.x, size.y);
+    p.y += 0.06;
+
+    float t = uTime;
+    float angle = atan(p.y, p.x);
+    float wobble = 0.018 * sin(angle * 3.0 - t * 0.40)
+                 + 0.013 * cos(angle * 5.0 + t * 0.26);
+    float distance = length(p) + wobble;
+
+    float arrival = smoothstep(0.0, 0.85, uReveal);
+    float radius = mix(0.02, 0.58, arrival);
+    float ring = exp(-pow((distance - radius) / 0.085, 2.0));
+    float innerLight = exp(-dot(p, p) * 6.0);
+
+    float2 drift = p + float2(0.12 * sin(t * 0.19), 0.07 * cos(t * 0.17));
+    float cloud = exp(-dot(drift, drift) * 3.2);
+    float wave = 0.5 + 0.5 * sin(angle * 2.3 + t * 0.29 + distance * 7.0);
+
+    float3 paper = mix(float3(0.980, 0.974, 0.967),
+                       float3(0.070, 0.064, 0.064), uDark);
+    float3 rose = mix(float3(0.96, 0.67, 0.66),
+                      float3(0.56, 0.19, 0.22), uDark);
+    float3 lilac = mix(float3(0.73, 0.68, 0.84),
+                       float3(0.28, 0.23, 0.44), uDark);
+    float3 gold = mix(float3(1.00, 0.86, 0.69),
+                      float3(0.52, 0.33, 0.19), uDark);
+
+    float3 tint = mix(rose, lilac, wave);
+    tint = mix(tint, gold, 0.2 + 0.2 * sin(t * 0.23));
+
+    float strength = clamp(cloud * 0.41 + ring * 0.31 + innerLight * 0.11, 0.0, 0.83);
+    strength *= mix(0.65, 1.0, smoothstep(0.0, 0.45, uReveal));
+    float3 color = mix(paper, tint, strength);
+    return half4(half3(clamp(color, 0.0, 1.0)), 1.0);
+}

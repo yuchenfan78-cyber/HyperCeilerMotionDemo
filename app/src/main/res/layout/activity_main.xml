@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scene"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface">
+
+    <me.rain.motiondemo.GlowView
+        android:id="@+id/glow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no" />
+
+    <TextView
+        android:id="@+id/eyebrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.19"
+        android:text="@string/heading"
+        android:textColor="@color/secondary_text"
+        android:textSize="10sp" />
+
+    <LinearLayout
+        android:id="@+id/brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:translationY="-42dp">
+
+        <me.rain.motiondemo.LogoView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/brand_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.035"
+            android:text="@string/brand_name"
+            android:textColor="@color/primary_text"
+            android:textSize="29sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.21"
+            android:text="@string/subtitle"
+            android:textColor="@color/secondary_text"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/replay_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="52dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/replay_description"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:background="@drawable/replay_background"
+            android:elevation="8dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_arrow" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.16"
+            android:text="@string/replay"
+            android:textColor="@color/secondary_text"
+            android:textSize="12sp" />
+    </LinearLayout>
+</FrameLayout>
