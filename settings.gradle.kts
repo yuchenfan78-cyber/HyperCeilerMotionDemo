@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HyperCeilerOriginalMotionDemo"
+rootProject.name = "RainKernel"
 include(":app")

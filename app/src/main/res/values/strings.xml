@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HyperCeiler Motion</string>
-    <string name="provision_start_content_description">Replay animation</string>
+    <string name="app_name">RainKernel</string>
+    <string name="next_step">下一步</string>
+    <string name="next_step_pending">下一步界面尚未接入</string>
 </resources>

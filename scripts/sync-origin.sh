@@ -17,17 +17,11 @@ fetch() {
 
 rm -f "$DEST/res/raw/glow.glsl"
 fetch 'library/provision/src/main/res/raw/glow.glsl' 'res/raw/glow.agsl'
-fetch 'library/provision/src/main/res/layout/provision_startup_layout.xml' 'res/layout/provision_startup_layout.xml'
-fetch 'library/provision/src/main/res/drawable/provision_logo_image.xml' 'res/drawable/provision_logo_image.xml'
-fetch 'library/provision/src/main/res/drawable/provision_logo_image_lite.xml' 'res/drawable/provision_logo_image_lite.xml'
-fetch 'library/provision/src/main/res/drawable/provision_text_logo_image.xml' 'res/drawable/provision_text_logo_image.xml'
-fetch 'library/provision/src/main/res/drawable/provision_text_logo_image_lite.xml' 'res/drawable/provision_text_logo_image_lite.xml'
-fetch 'library/provision/src/main/res/drawable/provision_icon_arrow.xml' 'res/drawable/provision_icon_arrow.xml'
-fetch 'library/provision/src/main/res/drawable/provision_next.xml' 'res/drawable/provision_next.xml'
-fetch 'library/provision/src/main/res/drawable/provision_next_lite.xml' 'res/drawable/provision_next_lite.xml'
-fetch 'library/provision/src/main/res/drawable/provision_logo_image_bg.webp' 'res/drawable/provision_logo_image_bg.webp'
 fetch 'library/provision/src/main/java/com/sevtinge/hyperceiler/provision/renderengine/GlowController.java' 'java/com/sevtinge/hyperceiler/provision/renderengine/GlowController.java'
 fetch 'library/provision/src/main/java/com/sevtinge/hyperceiler/provision/renderengine/GlowPainter.java' 'java/com/sevtinge/hyperceiler/provision/renderengine/GlowPainter.java'
 fetch 'library/provision/src/main/java/com/sevtinge/hyperceiler/provision/renderengine/RenderViewLayout.java' 'java/com/sevtinge/hyperceiler/provision/renderengine/RenderViewLayout.java'
+
+sed -i 's/import com.sevtinge.hyperceiler.provision.R;/import me.rain.kernel.R;/' \
+    "$DEST/java/com/sevtinge/hyperceiler/provision/renderengine/GlowPainter.java"
 
 curl -fsSL --retry 3 --retry-delay 2 "$BASE/LICENSE" -o "$ROOT/LICENSE"

@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    namespace = "com.sevtinge.hyperceiler.provision"
+    namespace = "me.rain.kernel"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "me.rain.motiondemo"
+        applicationId = "me.rain.kernel"
         minSdk = 33
         targetSdk = 35
-        versionCode = 2
-        versionName = "2.0"
+        versionCode = 3
+        versionName = "3.0"
     }
 
     compileOptions {
