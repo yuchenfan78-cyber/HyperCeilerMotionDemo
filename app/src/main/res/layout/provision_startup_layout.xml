@@ -69,8 +69,11 @@
                 android:focusable="true"
                 android:contentDescription="@string/next_step"
                 android:background="@drawable/rainkernel_next_circle"
-                android:elevation="10dp"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless">
+                android:elevation="0dp"
+                android:translationZ="0dp"
+                android:stateListAnimator="@null"
+                android:clipToOutline="true"
+                android:foreground="?android:attr/selectableItemBackground">
 
                 <ImageView
                     android:layout_width="31dp"

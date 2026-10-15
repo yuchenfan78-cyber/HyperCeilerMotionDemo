@@ -50,6 +50,7 @@ dependencies {
     implementation("fan.miuix:appcompat:1.0.13.0")
     implementation("fan.miuix:animation:1.0.13.0")
     implementation("fan.miuix:folme:1.0.13.0")
+    implementation("androidx.activity:activity:1.12.1")
     implementation("top.yukonga.miuix.kmp:miuix-android:0.7.2")
     implementation("androidx.compose.ui:ui:1.9.3")
     implementation("androidx.compose.runtime:runtime:1.9.3")

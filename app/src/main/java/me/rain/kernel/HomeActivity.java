@@ -19,10 +19,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.ComponentActivity;
 import fan.animation.Folme;
-import fan.appcompat.app.AppCompatActivity;
 
-public final class HomeActivity extends AppCompatActivity {
+public final class HomeActivity extends ComponentActivity {
     private static final int[] PAGE_LAYOUTS = {
         R.layout.page_overview, R.layout.page_drivers,
         R.layout.page_profiles, R.layout.page_settings
