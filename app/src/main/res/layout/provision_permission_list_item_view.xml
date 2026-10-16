@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:background="@drawable/provision_list_item_background"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clipToOutline="true"
     android:paddingStart="16dp"
     android:paddingEnd="16dp">
     <TextView

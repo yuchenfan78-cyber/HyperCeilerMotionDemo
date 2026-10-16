@@ -3,8 +3,13 @@ package me.rain.kernel;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -58,17 +63,44 @@ public final class HomeActivity extends ComponentActivity {
     }
 
     private void buildPages() {
-        for (int i = 0; i < pages.length; i++) {
-            TextView page = new TextView(this);
-            page.setText(PAGE_TITLES[i]);
-            page.setTextColor(getColor(R.color.text_primary));
-            page.setTextSize(30f);
-            page.setPadding(dp(24), dp(26), dp(24), 0);
+        LayoutInflater inflater = getLayoutInflater();
+        pages[0] = inflater.inflate(R.layout.page_launcher, contentHost, false);
+        pages[1] = inflater.inflate(R.layout.page_drivers, contentHost, false);
+        for (int i = 2; i < pages.length; i++) {
+            TextView placeholder = new TextView(this);
+            placeholder.setText(PAGE_TITLES[i]);
+            placeholder.setTextColor(getColor(R.color.text_primary));
+            placeholder.setTextSize(30f);
+            placeholder.setPadding(dp(24), dp(26), dp(24), 0);
+            pages[i] = placeholder;
+        }
+        pages[0].findViewById(R.id.launcher_start).setOnClickListener(v -> requestAssistantStart());
+        pages[1].findViewById(R.id.drivers_open_repository).setOnClickListener(v -> openRepository());
+        for (View page : pages) {
             page.setVisibility(View.GONE);
-            pages[i] = page;
             contentHost.addView(page, new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+    }
+
+    private void requestAssistantStart() {
+        // Launching a driver must be wired to the real backend. Never show fake success.
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.launcher_start_unavailable_title)
+                .setMessage(R.string.launcher_start_unavailable_message)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.launcher_open_drivers, (dialog, which) -> showPage(1))
+                .show();
+    }
+
+    private void openRepository() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://gitee.com/cyber0228/storage")));
+        } catch (ActivityNotFoundException | SecurityException error) {
+            android.widget.Toast.makeText(this, R.string.repo_link_unavailable,
+                    android.widget.Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -103,7 +135,6 @@ public final class HomeActivity extends ComponentActivity {
             pageAnimator = null;
         }
         int oldIndex = currentPage;
-        // Normalize every page, including half-translated pages from interrupted gestures.
         for (View view : pages) {
             view.setTranslationX(0f);
             view.setAlpha(1f);
@@ -143,7 +174,6 @@ public final class HomeActivity extends ComponentActivity {
                 incoming.setAlpha(1f);
             }
         });
-        // Wait for first layout if the user taps during the very first frame.
         if (contentHost.getWidth() == 0) {
             incoming.setTranslationX(0f);
             outgoing.setVisibility(View.GONE);

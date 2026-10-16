@@ -21,8 +21,8 @@ public final class PermissionItemView extends FrameLayout implements Checkable {
         title = findViewById(R.id.item_title);
         checkIcon = findViewById(R.id.item_icon);
         setChecked(false);
-        setClickable(false);
-        setFocusable(false);
+        setClickable(true);
+        setFocusable(true);
     }
 
     public void setItemTitle(int stringRes) { title.setText(stringRes); setChecked(checked); }

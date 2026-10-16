@@ -4,4 +4,7 @@
     <color name="text_primary">#171717</color>
     <color name="text_secondary">#646464</color>
     <color name="chip_background">#F0F0F0</color>
+    <color name="surface_card">#FFFFFF</color>
+    <color name="launch_button_background">#171717</color>
+    <color name="launch_button_text">#FFFFFF</color>
 </resources>

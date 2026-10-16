@@ -7,52 +7,12 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/content_host"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="74dp"
-            android:gravity="center_vertical"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="29dp"
-                android:layout_height="29dp"
-                android:src="@drawable/rainkernel_logo"
-                android:tint="@color/text_primary"
-                android:contentDescription="@null" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="11dp"
-                android:text="@string/app_name"
-                android:textColor="@color/text_primary"
-                android:textStyle="bold"
-                android:textSize="21sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_chip"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="7dp"
-                android:paddingBottom="7dp"
-                android:text="@string/version_label"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/content_host"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+        android:clipChildren="true"
+        android:clipToPadding="false" />
 
     <me.rain.kernel.RainFloatingNav
         android:id="@+id/floating_navigation"
