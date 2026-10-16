@@ -17,7 +17,6 @@ fetch() {
 
 rm -rf "$DEST/java/me/rain/motiondemo"
 rm -f "$DEST/res/layout/page_overview.xml" \
-      "$DEST/res/layout/page_drivers.xml" \
       "$DEST/res/layout/page_profiles.xml" \
       "$DEST/res/layout/page_settings.xml" \
       "$DEST/res/values/widgets.xml" \
