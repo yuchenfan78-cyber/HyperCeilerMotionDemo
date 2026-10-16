@@ -12,12 +12,18 @@ android {
         applicationId = "me.rain.kernel"
         minSdk = 35
         targetSdk = 35
-        versionCode = 7
-        versionName = "0.4.0"
+        versionCode = 8
+        versionName = "0.5.0"
     }
 
     buildFeatures {
         compose = true
+    }
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
     }
 
     compileOptions {
@@ -47,6 +53,7 @@ tasks.matching {
 
 
 dependencies {
+    implementation("com.android.tools.build:apksig:8.10.1")
     implementation("fan.miuix:appcompat:1.0.13.0")
     implementation("fan.miuix:animation:1.0.13.0")
     implementation("fan.miuix:folme:1.0.13.0")

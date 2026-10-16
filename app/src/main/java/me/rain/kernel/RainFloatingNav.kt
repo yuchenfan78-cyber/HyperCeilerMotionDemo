@@ -48,7 +48,6 @@ class RainFloatingNav @JvmOverloads constructor(
                 listOf(
                     NavigationItem(context.getString(R.string.tab_overview), outline("overview", "M3,10.5 L12,3 L21,10.5 L21,20 L14.5,20 L14.5,14 L9.5,14 L9.5,20 L3,20 Z")),
                     NavigationItem(context.getString(R.string.tab_drivers), outline("drivers", "M4,6 L12,2 L20,6 L12,10 Z M4,12 L12,16 L20,12 M4,18 L12,22 L20,18")),
-                    NavigationItem(context.getString(R.string.tab_profiles), outline("profiles", "M4,7 L20,7 M4,12 L20,12 M4,17 L20,17 M9,4 L9,10 M15,9 L15,15 M9,14 L9,20")),
                     NavigationItem(context.getString(R.string.tab_settings), outline("settings", "M12,3 A9,9 0,1 1,12 21 A9,9 0,1 1,12 3 M12,9 A3,3 0,1 1,12 15 A3,3 0,1 1,12 9")),
                 )
             }
@@ -81,7 +80,7 @@ class RainFloatingNav @JvmOverloads constructor(
     }
 
     fun select(index: Int) {
-        if (index in 0..3) selectedPage = index
+        if (index in 0..2) selectedPage = index
     }
 
     private fun outline(name: String, data: String): ImageVector =

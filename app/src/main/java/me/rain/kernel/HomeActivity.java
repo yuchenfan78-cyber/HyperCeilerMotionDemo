@@ -6,6 +6,10 @@ import android.animation.ValueAnimator;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.view.KeyEvent;
+import android.widget.LinearLayout;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,8 +29,7 @@ import androidx.dynamicanimation.animation.SpringForce;
 public final class HomeActivity extends ComponentActivity {
     public static final String SPRING_ENTRY = "rain.spring_entry";
     private static final int[] PAGE_TITLES = {
-            R.string.tab_overview, R.string.tab_drivers,
-            R.string.tab_profiles, R.string.tab_settings
+            R.string.tab_overview, R.string.tab_drivers, R.string.tab_settings
     };
     private static final long PAGE_DURATION = 350L;
     private static final PathInterpolator PAGE_EASING =
@@ -37,6 +40,13 @@ public final class HomeActivity extends ComponentActivity {
     private ValueAnimator pageAnimator;
     private int currentPage = -1;
     private int bottomInset;
+    private ProfileSettingsController myPage;
+    private long lastVolumeDown;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ThemePreferences.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +76,9 @@ public final class HomeActivity extends ComponentActivity {
         LayoutInflater inflater = getLayoutInflater();
         pages[0] = inflater.inflate(R.layout.page_launcher, contentHost, false);
         pages[1] = inflater.inflate(R.layout.page_drivers, contentHost, false);
-        for (int i = 2; i < pages.length; i++) {
-            TextView placeholder = new TextView(this);
-            placeholder.setText(PAGE_TITLES[i]);
-            placeholder.setTextColor(getColor(R.color.text_primary));
-            placeholder.setTextSize(30f);
-            placeholder.setPadding(dp(24), dp(26), dp(24), 0);
-            pages[i] = placeholder;
-        }
+        pages[2] = inflater.inflate(R.layout.page_me, contentHost, false);
+        myPage = new ProfileSettingsController(this, pages[2]);
+        DriverCatalog.bind(this, pages[1].findViewById(R.id.drivers_list));
         pages[0].findViewById(R.id.launcher_start).setOnClickListener(v -> requestAssistantStart());
         pages[1].findViewById(R.id.drivers_open_repository).setOnClickListener(v -> openRepository());
         for (View page : pages) {
@@ -142,6 +147,7 @@ public final class HomeActivity extends ComponentActivity {
         }
         currentPage = index;
         floatingNavigation.select(index);
+        if (index == 2 && myPage != null) myPage.loadAvatarOnce();
         View incoming = pages[index];
         incoming.setVisibility(View.VISIBLE);
         if (oldIndex < 0) return;
@@ -190,8 +196,47 @@ public final class HomeActivity extends ComponentActivity {
         super.onSaveInstanceState(state);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && event.getRepeatCount() == 0
+                && getSharedPreferences(ThemePreferences.PREFS, MODE_PRIVATE)
+                        .getBoolean("volume_shortcut", false)) {
+            long now = android.os.SystemClock.elapsedRealtime();
+            if (now - lastVolumeDown < 600L) {
+                lastVolumeDown = 0;
+                requestAssistantStart();
+                return true;
+            }
+            lastVolumeDown = now;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        String mode = getSharedPreferences(ThemePreferences.PREFS, MODE_PRIVATE)
+                .getString(ThemePreferences.MODE, "system");
+        if ("time".equals(mode)) {
+            boolean dark = ThemePreferences.isNightByClock();
+            boolean actualDark = (getResources().getConfiguration().uiMode
+                    & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+            if (dark != actualDark) recreate();
+        }
+    }
+
+    @Override protected void onStop() {
+        super.onStop();
+        if (!isChangingConfigurations() && !isFinishing()
+                && (myPage == null || !myPage.isEditingPackage())
+                && getSharedPreferences(ThemePreferences.PREFS, MODE_PRIVATE)
+                        .getBoolean("no_background", false)) {
+            finishAndRemoveTask();
+        }
+    }
+
     @Override protected void onDestroy() {
         if (pageAnimator != null) pageAnimator.cancel();
+        if (myPage != null) myPage.close();
         super.onDestroy();
     }
 }

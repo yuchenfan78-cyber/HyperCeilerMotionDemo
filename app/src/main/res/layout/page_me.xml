@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:scrollbars="none">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="36dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="18dp"
+            android:background="@drawable/rainkernel_surface_card">
+            <ImageView
+                android:id="@+id/me_avatar"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/rainkernel_avatar_background"
+                android:src="@drawable/rainkernel_avatar_placeholder"
+                android:padding="0dp"
+                android:scaleType="centerCrop"
+                android:clipToOutline="true"
+                android:contentDescription="@string/me_avatar_description"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/me_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/me_default_nickname"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/me_slogan"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:maxLines="2"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView style="@style/RainSettingsSection" android:text="@string/me_program_settings"/>
+        <LinearLayout android:id="@+id/me_program_group" style="@style/RainSettingsGroup"/>
+
+        <TextView style="@style/RainSettingsSection" android:text="@string/me_system_info"/>
+        <LinearLayout android:id="@+id/me_system_group" style="@style/RainSettingsGroup"/>
+
+        <TextView style="@style/RainSettingsSection" android:text="@string/me_assist_settings"/>
+        <LinearLayout android:id="@+id/me_assist_group" style="@style/RainSettingsGroup"/>
+
+        <TextView style="@style/RainSettingsSection" android:text="@string/me_package_settings"/>
+        <LinearLayout android:id="@+id/me_package_group" style="@style/RainSettingsGroup"/>
+
+        <TextView style="@style/RainSettingsSection" android:text="@string/me_appearance"/>
+        <LinearLayout android:id="@+id/me_appearance_group" style="@style/RainSettingsGroup"/>
+
+        <TextView style="@style/RainSettingsSection" android:text="About"/>
+        <LinearLayout android:id="@+id/me_about_group" style="@style/RainSettingsGroup"/>
+    </LinearLayout>
+</ScrollView>
