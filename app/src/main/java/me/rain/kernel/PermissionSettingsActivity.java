@@ -17,7 +17,9 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.FragmentActivity;
 
 public final class PermissionSettingsActivity extends FragmentActivity {
-    private boolean enteringHome;
+    private boolean navigating;
+    private boolean reversing;
+    private Animator entryReveal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,12 +100,16 @@ public final class PermissionSettingsActivity extends FragmentActivity {
         }
         scene.setVisibility(View.VISIBLE);
         Animator reveal = ViewAnimationUtils.createCircularReveal(scene, cx, cy, radius, endRadius);
+        entryReveal = reveal;
         reveal.setDuration(600L);
         reveal.setInterpolator(new DecelerateInterpolator(1.2f));
         reveal.addListener(new AnimatorListenerAdapter() {
             @Override public void onAnimationEnd(Animator animation) {
-                dimScrim.setVisibility(View.GONE);
-                detail.setAlpha(1f);
+                if (!reversing) {
+                    dimScrim.setVisibility(View.GONE);
+                    detail.setAlpha(1f);
+                }
+                entryReveal = null;
             }
         });
         dimScrim.animate().alpha(0f).setStartDelay(80L).setDuration(510L).start();
@@ -112,19 +118,80 @@ public final class PermissionSettingsActivity extends FragmentActivity {
     }
 
     private void nextPage() {
-        if (enteringHome) return;
-        enteringHome = true;
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.putExtra(HomeActivity.SPRING_ENTRY, true);
-        startActivity(intent);
-        overridePendingTransition(0, 0);
-        finish();
+        if (navigating || reversing) return;
+        navigating = true;
+        try {
+            startActivity(new Intent(this, CardKeyActivity.class));
+            overridePendingTransition(R.anim.provision_slide_in_right,
+                    R.anim.provision_slide_out_left);
+        } catch (RuntimeException exception) {
+            navigating = false;
+            android.util.Log.e("RainKernel", "Unable to open card-key page", exception);
+        }
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        navigating = false;
     }
 
     private void closeToSplash() {
-        if (isFinishing()) return;
-        finish();
-        overridePendingTransition(R.anim.provision_slide_in_left,
-                R.anim.provision_slide_out_right);
+        if (isFinishing() || reversing) return;
+        reversing = true;
+        if (entryReveal != null) {
+            entryReveal.cancel();
+            entryReveal = null;
+        }
+        View scrim = findViewById(R.id.permission_transition_scrim);
+        if (scrim != null) {
+            scrim.animate().cancel();
+            scrim.setVisibility(View.GONE);
+        }
+        View scene = findViewById(R.id.permission_scene);
+        View content = findViewById(R.id.provision_lyt);
+        if (content != null) content.animate().cancel();
+        if (scene == null || !getIntent().getBooleanExtra(
+                RoundedThumbnailTransition.REVEAL, false)) {
+            finish();
+            overridePendingTransition(0, 0);
+            return;
+        }
+        int w = scene.getWidth();
+        int h = scene.getHeight();
+        if (w <= 0 || h <= 0) {
+            finish();
+            overridePendingTransition(0, 0);
+            return;
+        }
+        int[] origin = new int[2];
+        scene.getLocationOnScreen(origin);
+        int cx = Math.max(0, Math.min(w, getIntent().getIntExtra(
+                RoundedThumbnailTransition.CENTER_X, w / 2) - origin[0]));
+        int cy = Math.max(0, Math.min(h, getIntent().getIntExtra(
+                RoundedThumbnailTransition.CENTER_Y, h / 2) - origin[1]));
+        float largeRadius = (float) Math.hypot(
+                Math.max(cx, w - cx), Math.max(cy, h - cy));
+        float smallRadius = Math.max(1f, getIntent().getIntExtra(
+                RoundedThumbnailTransition.RADIUS, 36));
+        if (largeRadius <= smallRadius) {
+            finish();
+            overridePendingTransition(0, 0);
+            return;
+        }
+        // The permission window is translucent; shrinking it exposes A, which
+        // has deliberately remained alive and has no outgoing slide animation.
+        scene.setVisibility(View.VISIBLE);
+        content.animate().alpha(0f).setDuration(180L).start();
+        Animator reverse = ViewAnimationUtils.createCircularReveal(
+                scene, cx, cy, largeRadius, smallRadius);
+        reverse.setDuration(540L);
+        reverse.setInterpolator(new DecelerateInterpolator(1.1f));
+        reverse.addListener(new AnimatorListenerAdapter() {
+            @Override public void onAnimationEnd(Animator animation) {
+                finish();
+                overridePendingTransition(0, 0);
+            }
+        });
+        reverse.start();
     }
 }

@@ -5,8 +5,10 @@ Pinned render-engine commit: 861be0473847d5c020102191f2c2891acda5d628
 Copyright (C) 2023-2026 HyperCeiler Contributions
 License: GNU Affero General Public License v3.0 (AGPL-3.0)
 
-The shader and render-engine classes are fetched from the pinned commit at
-build time. The welcome layout, permission list item appearance, blue check
+The shader and GlowPainter / RenderViewLayout render-engine classes are fetched
+from the pinned commit at build time. GlowController includes a local freeze/
+thaw adaptation of the original controller. The exact provision_service_state.xml
+speaker vector is also fetched from that commit at build time. The welcome layout, permission list item appearance, blue check
 vector, and OOBE page structure are adapted for the standalone RainKernel app.
 The animation uses public Android PixelCopy, ActivityOptions, and
 ViewAnimationUtils APIs instead of the closed-source

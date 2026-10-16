@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">RainKernel</string>
     <string name="next_step">下一步</string>
-    <string name="version_label">PREVIEW 0.2</string>
+    <string name="version_label">PREVIEW 0.3</string>
     <string name="tab_overview">总览</string>
     <string name="tab_drivers">驱动</string>
     <string name="tab_profiles">配置</string>
@@ -15,4 +15,10 @@
     <string name="provision_set_permission_later">下列权限将在后续功能接入时验证。未验证的项目不会显示已授权。</string>
     <string name="provision_continue">继续</string>
     <string name="provision_back_description">返回</string>
+    <string name="auth_title">卡密验证</string>
+    <string name="auth_hint">请输入卡密</string>
+    <string name="auth_subtitle">当前为开发预览版，输入任意非空卡密即可进入。</string>
+    <string name="auth_confirm">登录并进入</string>
+    <string name="auth_key_required">请输入任意卡密</string>
+    <string name="auth_open_failed">无法进入主页，请稍后再试</string>
 </resources>

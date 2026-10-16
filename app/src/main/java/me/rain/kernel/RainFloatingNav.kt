@@ -4,11 +4,18 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
@@ -45,8 +52,20 @@ class RainFloatingNav @JvmOverloads constructor(
                     NavigationItem(context.getString(R.string.tab_settings), outline("settings", "M12,3 A9,9 0,1 1,12 21 A9,9 0,1 1,12 3 M12,9 A3,3 0,1 1,12 15 A3,3 0,1 1,12 9")),
                 )
             }
+            val bounce = remember { Animatable(1f) }
+            var ready by remember { mutableStateOf(false) }
+            LaunchedEffect(selectedPage) {
+                if (ready) {
+                    bounce.animateTo(0.984f, tween(durationMillis = 90))
+                    bounce.animateTo(1f, spring(dampingRatio = 0.64f, stiffness = 320f))
+                } else ready = true
+            }
             MiuixTheme(controller = controller) {
                 FloatingNavigationBar(
+                    modifier = Modifier.graphicsLayer {
+                        scaleX = bounce.value
+                        scaleY = bounce.value
+                    },
                     items = pages,
                     selected = selectedPage,
                     onClick = { index -> if (index != selectedPage) onNavigate?.accept(index) },

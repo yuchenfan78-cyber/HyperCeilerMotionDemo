@@ -17,6 +17,7 @@ public final class MainActivity extends Activity {
     private RenderViewLayout renderLayout;
     private GlowController glowController;
     private MotionAnimator motionAnimator;
+    private LogoColorAnimator logoColors;
     private boolean started;
     private boolean launching;
 
@@ -39,6 +40,7 @@ public final class MainActivity extends Activity {
         NativeBlur.setupContainer(content, dp(50));
         NativeBlur.setupLogo(logo);
         NativeBlur.setupLogo(wordmark);
+        logoColors = new LogoColorAnimator(logo, wordmark);
         logo.setVisibility(View.INVISIBLE);
         logoWrapper.setVisibility(View.INVISIBLE);
         next.setVisibility(View.INVISIBLE);
@@ -91,20 +93,35 @@ public final class MainActivity extends Activity {
             fallback.setVisibility(View.VISIBLE);
         }
         motionAnimator.play();
+        logoColors.startOrResume();
     }
 
     @Override
     protected void onPause() {
-        if (glowController != null) glowController.stop();
+        if (glowController != null) {
+            if (launching) glowController.freeze();
+            else glowController.stop();
+        }
+        if (logoColors != null) logoColors.pause();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (started) launching = false;
+        if (logoColors != null && started) logoColors.startOrResume();
         if (started && renderLayout != null) renderLayout.post(() -> {
             try {
-                if (glowController != null) glowController.start(false);
+                if (glowController != null) {
+                    glowController.thaw();
+                    glowController.start(false);
+                }
+                View next = findViewById(R.id.next_layout);
+                if (next != null) {
+                    next.setVisibility(View.VISIBLE);
+                    next.setEnabled(true);
+                }
             } catch (RuntimeException error) {
                 Log.e(TAG, "Shader resume failed", error);
             }
@@ -114,6 +131,7 @@ public final class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         if (motionAnimator != null) motionAnimator.cancel();
+        if (logoColors != null) logoColors.destroy();
         if (glowController != null) glowController.stop();
         super.onDestroy();
     }

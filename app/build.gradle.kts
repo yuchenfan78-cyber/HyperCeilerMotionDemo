@@ -12,8 +12,8 @@ android {
         applicationId = "me.rain.kernel"
         minSdk = 35
         targetSdk = 35
-        versionCode = 5
-        versionName = "0.2.0"
+        versionCode = 6
+        versionName = "0.3.0"
     }
 
     buildFeatures {
@@ -56,4 +56,5 @@ dependencies {
     implementation("top.yukonga.miuix.kmp:miuix-android:0.7.2")
     implementation("androidx.compose.ui:ui:1.9.3")
     implementation("androidx.compose.runtime:runtime:1.9.3")
+    implementation("androidx.compose.animation:animation-core:1.9.3")
 }

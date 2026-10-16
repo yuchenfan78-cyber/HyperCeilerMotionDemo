@@ -40,7 +40,7 @@ rm -f "$DEST/res/drawable/provision_logo_image.xml" \
       "$DEST/res/values/compat_colors.xml" \
       "$DEST/res/values/dimens.xml"
 fetch 'library/provision/src/main/res/raw/glow.glsl' 'res/raw/glow.agsl'
-fetch 'library/provision/src/main/java/com/sevtinge/hyperceiler/provision/renderengine/GlowController.java' 'java/com/sevtinge/hyperceiler/provision/renderengine/GlowController.java'
+fetch 'library/provision/src/main/res/drawable/provision_service_state.xml' 'res/drawable/provision_service_state.xml'
 fetch 'library/provision/src/main/java/com/sevtinge/hyperceiler/provision/renderengine/GlowPainter.java' 'java/com/sevtinge/hyperceiler/provision/renderengine/GlowPainter.java'
 fetch 'library/provision/src/main/java/com/sevtinge/hyperceiler/provision/renderengine/RenderViewLayout.java' 'java/com/sevtinge/hyperceiler/provision/renderengine/RenderViewLayout.java'
 
